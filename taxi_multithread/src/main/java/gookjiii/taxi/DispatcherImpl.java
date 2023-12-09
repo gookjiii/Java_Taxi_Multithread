@@ -4,11 +4,12 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
+import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 public class DispatcherImpl implements Dispatcher {
 
-    private final Queue<Taxi> availableTaxis;
-    private final List<Order> orders;
+    private final ArrayBlockingQueue<Taxi> availableTaxis;
+    private final ArrayBlockingQueue<Order> orders;
     private final AtomicBoolean execute;
     private final int taxiCount;
     private final int orderCount;
@@ -16,8 +17,8 @@ public class DispatcherImpl implements Dispatcher {
     public DispatcherImpl(int taxiCount, int orderCount) {
         this.taxiCount = taxiCount;
         this.orderCount = orderCount;
-        this.availableTaxis = new ArrayDeque<>(taxiCount);
-        this.orders = new ArrayList<>(orderCount);
+        this.availableTaxis = new ArrayBlockingQueue<>(taxiCount);
+        this.orders = new ArrayBlockingQueue<>(orderCount);
         this.execute = new AtomicBoolean(true);
         initializeOrders(this.orderCount);
         initializeTaxis(this.taxiCount);

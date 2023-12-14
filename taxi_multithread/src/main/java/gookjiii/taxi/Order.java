@@ -8,8 +8,8 @@ public class Order {
 
     private OrderType orderType;
 
-    private static final int lowerBound = 1000;
-    private static final int upperBound = 1200;
+    private static final int lowerBound = 100;
+    private static final int upperBound = 105;
     private final int suspendedTime;
 
     public Order(String name, OrderType orderType) {
